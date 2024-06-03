@@ -1,0 +1,31 @@
+=geometry details ==
+solid_ec: ECal only with 3 modules, left, right and top
+
+= run simulation =====
+cd solid_gemc
+
+= update geometry=======
+cd $SoLID_GEMC/geometry/ec_segmented_moved_rod_3module
+./solid_ec.pl config.dat
+
+=run with graphic =====
+cd $SoLID_GEMC/script/
+solid_gemc ECal_3module_only.gcard 
+
+=run without graphic===== 
+solid_gemc ECal_3module_only.gcard -BEAM_P="e-,1*GeV,0*deg,0*deg" -SPREAD_P="0*GeV,0*deg,0*deg" -BEAM_V="(0,0,0)cm" -SPREAD_V="(0,25)cm" -N=1 -USE_GUI=0
+
+=GEMC help==
+olid_gemc -help-all
+
+=convert to root file====
+evio2root -INPUTF=out.evio -B="$SoLID_GEMC/geometry/ec_segmented_moved_rod_3module/solid_ec " -R="flux"
+
+=exit container===
+ctrl-d or exit
+
+= analysis result =====
+(do this outside of the container)
+cd your_work_dir/analysis
+source /your_root_version/bin/thisroot.csh
+root 'fileReducer_ec.C+("./out.root",1,1,4)'
