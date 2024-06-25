@@ -29,3 +29,5 @@ ctrl-d or exit
 cd your_work_dir/analysis
 source /your_root_version/bin/thisroot.csh
 root 'fileReducer_ec.C+("./out.root",1,1,4)'
+root
+.x resolution.C
