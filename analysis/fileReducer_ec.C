@@ -262,7 +262,7 @@ int fileReducer_ec(string inputfile_name,int numberOfFile=1, double event_actual
 					if(flux_id->at(j)==1) hit_id=0; // front of prelead
 					else if(flux_id->at(j)==2) hit_id=1; // EC back
 					else cout << "wrong flux_id" << flux_id->at(j) << endl;
-					if(hit_id==1 ){
+					if(hit_id==0 ){
 						//if( flux_tid->at(j)==1 && hit_id==1){
 
 						//Is_prime=1;
