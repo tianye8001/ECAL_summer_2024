@@ -1,8 +1,24 @@
+= install singularity (preferred) or docker to run the container on your local machine ====
+https://github.com/JeffersonLab/solid_release/blob/master/howto.md
+
+= get solid_gemc to your local directory==
+cd your_work_dir1 
+git clone https://github.com/JeffersonLab/solid_gemc.git
+
+= get simple ECal only geometry ECAL_summer_2024 from git==
+cd your_work_dir2
+git clone https://github.com/tianye8001/ECAL_summer_2024.git
+
 =geometry details ==
-solid_ec: ECal only with 3 modules, left, right and top
+/ECAL_summer_2024/ec_segmented_moved_rod_3module: ECal only with 3 modules, left, right and top
 
 = run simulation =====
-cd solid_gemc
+cd your_work_dir1/solid_gemc
+setenv SoLID_GEMC ./
+cd your_work_dir1/solid_gemc/geometry
+cp -r your_work_dir2/ECAL_summer_2024/ec_segmented_moved_rod_3module ./
+cd your_work_dir1/solid_gemc/script
+cp your_work_dir2/ECAL_summer_2024/script/*.gcard ./
 
 = update geometry=======
 cd $SoLID_GEMC/geometry/ec_segmented_moved_rod_3module
@@ -13,7 +29,7 @@ cd $SoLID_GEMC/script/
 solid_gemc ECal_3module_only.gcard 
 
 =run without graphic===== 
-solid_gemc ECal_3module_only.gcard -BEAM_P="e-,1*GeV,0*deg,0*deg" -SPREAD_P="0*GeV,0*deg,0*deg" -BEAM_V="(0,0,0)cm" -SPREAD_V="(0,25)cm" -N=1 -USE_GUI=0
+solid_gemc ECal_3module_only.gcard -BEAM_P="e-,1*GeV,0*deg,0*deg" -SPREAD_P="0*GeV,0*deg,0*deg" -BEAM_V="(0,0,0)cm" -SPREAD_V="(0.1,10)cm" -N=1 -USE_GUI=0
 
 =GEMC help==
 olid_gemc -help-all
@@ -26,8 +42,8 @@ ctrl-d or exit
 
 = analysis result =====
 (do this outside of the container)
-cd your_work_dir/analysis
+cd your_work_dir2/ECAL_summer_2024/analysis
 source /your_root_version/bin/thisroot.csh
-root 'fileReducer_ec.C+("./out.root",1,1,4)'
-root
+root 'fileReducer_ec.C+("/your_dir/out.root",1,1,4)'
+= plot energy resolution===
 .x resolution.C
