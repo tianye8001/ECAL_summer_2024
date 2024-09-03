@@ -286,8 +286,8 @@ int fileReducer_ec(string inputfile_name,int numberOfFile=1, double event_actual
 				// process ec
 				tree_solid_ec[n]->GetEntry(i);
 				tree_solid_ec_ps[n]->GetEntry(i);
-				dE=gRandom->Gaus(1.0,sqrt(pow(0.04149,2)+pow(0.07938,2)/7.0));
-				//dE=1.0;
+				//dE=gRandom->Gaus(1.0,sqrt(pow(0.04149,2)+pow(0.07938,2)/7.0));
+				dE=1.0;
 				double Eend_ec_sum=0;
 				double Eend_ec_ps_sum=0;	
 				double Eend_ec[4]={0};
